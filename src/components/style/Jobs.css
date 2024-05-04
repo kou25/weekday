@@ -1,0 +1,11 @@
+.card {
+  border-radius: 20px !important;
+  padding: 10px;
+}
+.card > h3 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+  color: #8b8b8b;
+}

@@ -20,7 +20,7 @@ export const WeekdayTabs = ({ selected, onChange }: Props) => {
           minHeight: "0px !important",
           height: "40px"
         }}
-        onChange={(event: React.SyntheticEvent, newValue: string) =>
+        onChange={(_: React.SyntheticEvent, newValue: string) =>
           onChange(newValue)
         }
       >
