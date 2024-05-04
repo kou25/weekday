@@ -1,11 +1,69 @@
 .card {
   border-radius: 20px !important;
-  padding: 10px;
+  padding: 20px;
+  font-size: 14px;
+  max-width: 380px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-.card > h3 {
+.card:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease-in-out;
+}
+.company-name {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 1px;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
   color: #8b8b8b;
+  margin: 0;
+}
+.job-role {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  text-transform: capitalize;
+}
+
+.company-info {
+  display: flex;
+  align-items: start;
+}
+
+.company-info img {
+  width: 40px;
+  height: auto;
+  object-fit: cover;
+}
+
+.company-info small {
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 5px;
+  text-transform: capitalize;
+}
+.job-details {
+  font-weight: 300;
+}
+p {
+  margin: 0;
+}
+
+.info-container > h3 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  color: #8b8b8b;
+}
+
+.info-container > p {
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+#expand {
+  cursor: pointer;
+  color: #3522e2;
 }
