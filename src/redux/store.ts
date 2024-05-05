@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import jobListReducer from "./slice/jobListSlice";
+import filterReducer from "./slice/filterSlice";
 export const store = configureStore({
   reducer: {
-    jobList: jobListReducer
+    jobList: jobListReducer,
+    filters: filterReducer
   }
 });
 

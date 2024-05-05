@@ -13,6 +13,9 @@ function App() {
   const { jobs, total, loading } = useSelector(
     (state: RootState) => state.jobList
   );
+  const currentFilters = useSelector(
+    (state: RootState) => state.filters.filters
+  );
   const [tabSelected, setTabSelected] = useState<string>("search");
 
   useEffect(() => {
@@ -45,7 +48,7 @@ function App() {
           onChange={(value: string) => setTabSelected(value)}
           count={total}
         />
-        <Filters />
+        <Filters data={currentFilters} />
         <Jobs data={memoizedJobs} />
         <Loader />
       </div>

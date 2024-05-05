@@ -3,26 +3,46 @@ import {
   IconButton,
   InputAdornment,
   MenuItem,
-  Select
+  Select,
+  SelectChangeEvent
 } from "@mui/material";
 import { IoIosClose } from "react-icons/io";
 import { drowdownInterface } from "../utils/staticOptions";
+import { filterType } from "../utils/filterType";
 
 const WeekdaySelect = ({
+  name,
   label,
   minWidth,
   placeholder,
   options,
   value: selectedValue,
-  multiple = false
+  multiple = false,
+  onFilterChange
 }: {
+  name: string;
   label: string;
   minWidth: number;
   placeholder: string;
   options: drowdownInterface[];
   value: string | string[];
   multiple?: boolean;
+  onFilterChange: (newFilters: Partial<filterType>) => void;
 }) => {
+  const handleChange = (e: SelectChangeEvent<string | string[]>) => {
+    const newValue = e.target.value;
+    if (multiple) {
+      const newArrayValue = Array.isArray(newValue) ? newValue : [newValue];
+      onFilterChange({ [name]: newArrayValue });
+    } else {
+      onFilterChange({ [name]: newValue as string });
+    }
+  };
+
+  const clearValue = () => {
+    onFilterChange({ [name]: multiple ? [] : "" });
+  };
+
   return (
     <>
       {(multiple ? selectedValue.length > 0 : selectedValue) && <p>{label}</p>}
@@ -32,7 +52,7 @@ const WeekdaySelect = ({
           id="exp"
           value={selectedValue}
           multiple={multiple}
-          // onChange={handleChange}
+          onChange={handleChange}
           displayEmpty={true}
           renderValue={(value: string | string[]) =>
             multiple ? (
@@ -58,7 +78,7 @@ const WeekdaySelect = ({
                   marginRight: 2
                 }}
               >
-                <IconButton>
+                <IconButton onClick={clearValue}>
                   <IoIosClose />
                 </IconButton>
               </InputAdornment>
