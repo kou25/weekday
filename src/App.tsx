@@ -4,10 +4,11 @@ import Navbar from "./components/Navbar";
 import { WeekdayTabs } from "./components/WeekdayTabs";
 import Filters from "./components/Filters";
 import Jobs from "./components/Jobs";
+import { jobInterface } from "./shared/jobType";
 
 function App() {
   const [tabSelected, setTabSelected] = useState("search");
-  const [jobs, setJobs] = useState<any[]>([]);
+  const [jobs, setJobs] = useState<jobInterface[]>([]);
   useEffect(() => {
     const fetchJobs = async () => {
       const myHeaders = new Headers();

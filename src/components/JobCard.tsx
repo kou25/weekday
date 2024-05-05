@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { useState } from "react";
-export const JobCard = ({ job }: { job: any }) => {
+import { jobInterface } from "../shared/jobType";
+import { findSalary } from "../shared/findSalary";
+export const JobCard = ({ job }: { job: jobInterface }) => {
   const [expand, setExpand] = useState<boolean>(false);
 
   const toggleExpand = () => {
@@ -21,7 +22,9 @@ export const JobCard = ({ job }: { job: any }) => {
       </div>
       <Box my={2}>
         <Typography variant="body2" fontWeight={300}>
-          Estimated Salary: ₹{job.minJdSalary ?? 0} - {job.maxJdSalary}
+          Estimated Salary: ₹
+          {findSalary(job.minJdSalary ?? 0, job.salaryCurrencyCode)} -{" "}
+          {findSalary(job.maxJdSalary ?? 0, job.salaryCurrencyCode)}
           {"  "}
           LPA ✅
         </Typography>
@@ -51,6 +54,9 @@ export const JobCard = ({ job }: { job: any }) => {
           color="primary"
           fullWidth
           disableElevation={true}
+          onClick={() => {
+            window.open(job.jdLink, "_blank");
+          }}
           sx={{
             backgroundColor: "rgb(85, 239, 196)",
             color: "rgb(0, 0, 0)",

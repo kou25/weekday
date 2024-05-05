@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Grid } from "@mui/material";
 import "./style/Jobs.css";
 import { JobCard } from "./JobCard";
-const Jobs = ({ data }: { data: any[] }) => {
+import { jobInterface } from "../shared/jobType";
+const Jobs = ({ data }: { data: jobInterface[] }) => {
   return (
     <Grid
       container
@@ -10,7 +10,7 @@ const Jobs = ({ data }: { data: any[] }) => {
       columnSpacing={{ xs: 1, sm: 2, md: 4 }}
       sx={{ marginTop: 2 }}
     >
-      {data.map((job: any) => (
+      {data.map((job: jobInterface) => (
         <Grid item xs={4} key={job.jdUid}>
           <JobCard job={job} />
         </Grid>
