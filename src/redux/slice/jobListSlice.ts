@@ -1,54 +1,37 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { jobInterface } from "../../utils/jobType";
+import { fetchJobs } from "../action/jobsAction";
 
 interface JobListState {
   jobs: jobInterface[];
   total: number;
   loading: boolean;
   error: string | null;
+  pagination: {
+    limit: number;
+    offset: number;
+  };
 }
 
 const initialState: JobListState = {
   jobs: [],
   loading: false,
   error: null,
-  total: 0
-};
-
-export const fetchJobs = createAsyncThunk<
-  { jdList: jobInterface[]; totalCount: number },
-  void,
-  { rejectValue: string }
->("jobList/fetchJobs", async () => {
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  const body = JSON.stringify({
+  total: 0,
+  pagination: {
     limit: 10,
     offset: 0
-  });
-
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body
-  };
-
-  const response = await fetch(
-    "https://api.weekday.technology/adhoc/getSampleJdJSON",
-    requestOptions
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch jobs");
   }
-  const data = await response.json();
-  return data;
-});
+};
 
 const jobListSlice = createSlice({
   name: "jobList",
   initialState,
-  reducers: {},
+  reducers: {
+    updatePagination(state, action) {
+      state.pagination.offset = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchJobs.pending, (state) => {
@@ -58,7 +41,7 @@ const jobListSlice = createSlice({
       .addCase(fetchJobs.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.jobs = action.payload.jdList;
+        state.jobs = state.jobs.concat(action.payload.jdList);
         state.total = action.payload.totalCount;
       })
       .addCase(fetchJobs.rejected, (state, action) => {
@@ -67,5 +50,7 @@ const jobListSlice = createSlice({
       });
   }
 });
+
+export const { updatePagination } = jobListSlice.actions;
 
 export default jobListSlice.reducer;
