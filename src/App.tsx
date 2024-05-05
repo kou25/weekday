@@ -1,49 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Navbar from "./components/Navbar";
 import { WeekdayTabs } from "./components/WeekdayTabs";
 import Filters from "./components/Filters";
 import Jobs from "./components/Jobs";
-import { jobInterface } from "./utils/jobType";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "./redux/store";
+import { fetchJobs } from "./redux/slice/jobListSlice";
 
 function App() {
+  const dispatch: AppDispatch = useDispatch();
+  const { jobs, total } = useSelector((state: RootState) => state.jobList);
   const [tabSelected, setTabSelected] = useState<string>("search");
-  const [count, setCount] = useState<number>(0);
-  const [jobs, setJobs] = useState<jobInterface[]>([]);
   useEffect(() => {
-    const fetchJobs = async () => {
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+    dispatch(fetchJobs());
+  }, [dispatch]);
 
-      const body = JSON.stringify({
-        limit: 10,
-        offset: 0
-      });
-
-      const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body
-      };
-
-      try {
-        const response = await fetch(
-          "https://api.weekday.technology/adhoc/getSampleJdJSON",
-          requestOptions
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch jobs");
-        }
-        const data = await response.json();
-        setJobs(data.jdList);
-        setCount(data.totalCount);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchJobs();
-  }, []);
+  // Memoize the jobs array
+  const memoizedJobs = useMemo(() => jobs, [jobs]);
 
   return (
     <section className="jobs-container">
@@ -52,10 +26,10 @@ function App() {
         <WeekdayTabs
           selected={tabSelected}
           onChange={(value: string) => setTabSelected(value)}
-          count={count}
+          count={total}
         />
         <Filters />
-        <Jobs data={jobs} />
+        <Jobs data={memoizedJobs} />
       </div>
     </section>
   );
