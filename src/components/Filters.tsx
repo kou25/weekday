@@ -6,6 +6,7 @@ import {
   experiences,
   minBasePayOptions,
   remoteOptions,
+  roles,
   techStackOptions
 } from "../utils/staticOptions";
 const Filters = () => {
@@ -17,6 +18,7 @@ const Filters = () => {
           label="Experience"
           placeholder="Experience"
           options={experiences}
+          value={""}
         />
       </Box>
       <Box sx={{ mx: 1 }}>
@@ -31,6 +33,7 @@ const Filters = () => {
           minWidth={120}
           placeholder="Remote"
           options={remoteOptions}
+          value={""}
         />
       </Box>
       <Box sx={{ mr: 1 }}>
@@ -39,14 +42,18 @@ const Filters = () => {
           minWidth={120}
           placeholder="Tech"
           options={techStackOptions}
+          value={[]}
+          multiple
         />
       </Box>
       <Box sx={{ mr: 1 }}>
         <WeekdaySelect
-          label="Role"
+          label="Roles"
           minWidth={120}
-          placeholder="Role"
-          options={[]}
+          placeholder="Roles"
+          options={roles}
+          value={[]}
+          multiple
         />
       </Box>
       <Box>
@@ -55,6 +62,7 @@ const Filters = () => {
           minWidth={120}
           placeholder="Min Base Pay"
           options={minBasePayOptions}
+          value={""}
         />
       </Box>
     </section>

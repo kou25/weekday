@@ -52,7 +52,7 @@ export const JobCard = ({ job }: { job: jobInterface }) => {
         <Button
           variant="contained"
           color="primary"
-          fullWidth
+          fullWidth={true}
           disableElevation={true}
           onClick={() => {
             window.open(job.jdLink, "_blank");

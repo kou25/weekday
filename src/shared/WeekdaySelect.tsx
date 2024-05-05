@@ -12,25 +12,36 @@ const WeekdaySelect = ({
   label,
   minWidth,
   placeholder,
-  options
+  options,
+  value: selectedValue,
+  multiple = false
 }: {
   label: string;
   minWidth: number;
   placeholder: string;
   options: drowdownInterface[];
+  value: string | string[];
+  multiple?: boolean;
 }) => {
   return (
     <>
-      <p>{label}</p>
+      {(multiple ? selectedValue.length > 0 : selectedValue) && <p>{label}</p>}
       <FormControl sx={{ minWidth: minWidth }} size="small">
         <Select
           labelId="exp-label"
           id="exp"
-          value={""}
+          value={selectedValue}
+          multiple={multiple}
           // onChange={handleChange}
           displayEmpty={true}
-          renderValue={(value: string) =>
-            value !== "" ? (
+          renderValue={(value: string | string[]) =>
+            multiple ? (
+              Array.isArray(value) && value.length > 0 ? (
+                <div>{value.join(", ")}</div>
+              ) : (
+                <span style={{ color: "#A2A2A2" }}>{placeholder}</span>
+              )
+            ) : value !== "" ? (
               value
             ) : (
               <span style={{ color: "#A2A2A2" }}>{placeholder}</span>
@@ -40,24 +51,31 @@ const WeekdaySelect = ({
             fontSize: "12px"
           }}
           endAdornment={
-            <InputAdornment
-              position="end"
-              sx={{
-                marginRight: 2
-              }}
-            >
-              <IconButton>
-                <IoIosClose />
-              </IconButton>
-            </InputAdornment>
+            (multiple ? selectedValue.length > 0 : selectedValue) && (
+              <InputAdornment
+                position="end"
+                sx={{
+                  marginRight: 2
+                }}
+              >
+                <IconButton>
+                  <IoIosClose />
+                </IconButton>
+              </InputAdornment>
+            )
           }
-          MenuProps={{ sx: { height: "300px" } }}
+          MenuProps={{ sx: { height: "400px" } }}
+          style={{ height: 40 }}
         >
           {options.map((option) => (
             <MenuItem
               key={option.id}
               value={option.value}
-              sx={{ fontSize: "12px" }}
+              sx={{
+                fontSize: "12px",
+                textTransform: option?.disabled ? "uppercase" : "capitalize"
+              }}
+              disabled={option?.disabled}
             >
               {option.value}
             </MenuItem>
