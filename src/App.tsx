@@ -145,7 +145,7 @@ function App() {
           count={areFiltersEmpty() ? total : memoizedJobs.length}
         />
         <Filters data={currentFilters} />
-        <Jobs data={memoizedJobs} />
+        <Jobs data={memoizedJobs} loading={loading} />
         <Loader />
       </div>
     </section>

@@ -3,7 +3,13 @@ import "./style/Jobs.css";
 import { JobCard } from "./JobCard";
 import { jobInterface } from "../utils/jobType";
 import NotFound from "./NotFound";
-const Jobs = ({ data }: { data: jobInterface[] }) => {
+const Jobs = ({
+  data,
+  loading
+}: {
+  data: jobInterface[];
+  loading: boolean;
+}) => {
   return data.length > 0 ? (
     <Grid
       container
@@ -18,7 +24,7 @@ const Jobs = ({ data }: { data: jobInterface[] }) => {
       ))}
     </Grid>
   ) : (
-    <NotFound />
+    !loading && <NotFound />
   );
 };
 
