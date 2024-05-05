@@ -2,8 +2,9 @@ import { Grid } from "@mui/material";
 import "./style/Jobs.css";
 import { JobCard } from "./JobCard";
 import { jobInterface } from "../utils/jobType";
+import NotFound from "./NotFound";
 const Jobs = ({ data }: { data: jobInterface[] }) => {
-  return (
+  return data.length > 0 ? (
     <Grid
       container
       spacing={6}
@@ -11,11 +12,13 @@ const Jobs = ({ data }: { data: jobInterface[] }) => {
       sx={{ marginTop: 1 }}
     >
       {data.map((job: jobInterface) => (
-        <Grid item xs={4} key={job.jdUid}>
+        <Grid item md={2} lg={4} xl={3} key={job.jdUid}>
           <JobCard job={job} />
         </Grid>
       ))}
     </Grid>
+  ) : (
+    <NotFound />
   );
 };
 

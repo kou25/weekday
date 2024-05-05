@@ -15,14 +15,13 @@ import { useDispatch } from "react-redux";
 import { setFilters } from "../redux/slice/filterSlice";
 const Filters = ({ data }: { data: filterType }) => {
   const dispatch: AppDispatch = useDispatch();
-  console.log(data, "daat");
   const handleFilterChange = (newFilters: Partial<filterType>) => {
     dispatch(setFilters({ ...data, ...newFilters }));
   };
 
   return (
     <section className="filters-container">
-      <Box>
+      <Box sx={{ mt: 1, mr: 1 }}>
         <WeekdaySelect
           minWidth={150}
           name="minExperience"
@@ -33,7 +32,7 @@ const Filters = ({ data }: { data: filterType }) => {
           onFilterChange={handleFilterChange}
         />
       </Box>
-      <Box sx={{ mx: 1 }}>
+      <Box sx={{ mr: 1, mt: 1 }}>
         <WeekdaySearch
           name="companyName"
           placeholder="Search Company Name"
@@ -41,7 +40,7 @@ const Filters = ({ data }: { data: filterType }) => {
           onFilterChange={handleFilterChange}
         />
       </Box>
-      <Box sx={{ mr: 1 }}>
+      <Box sx={{ mr: 1, mt: 1 }}>
         <WeekdaySearch
           name="location"
           placeholder="Search Location"
@@ -49,7 +48,7 @@ const Filters = ({ data }: { data: filterType }) => {
           onFilterChange={handleFilterChange}
         />
       </Box>
-      <Box sx={{ mr: 1 }}>
+      <Box sx={{ mr: 1, mt: 1 }}>
         <WeekdaySelect
           name="remote"
           label="Remote/on-site"
@@ -60,7 +59,7 @@ const Filters = ({ data }: { data: filterType }) => {
           onFilterChange={handleFilterChange}
         />
       </Box>
-      <Box sx={{ mr: 1 }}>
+      <Box sx={{ mr: 1, mt: 1 }}>
         <WeekdaySelect
           name="techStack"
           label="Tech stack"
@@ -72,7 +71,7 @@ const Filters = ({ data }: { data: filterType }) => {
           onFilterChange={handleFilterChange}
         />
       </Box>
-      <Box sx={{ mr: 1 }}>
+      <Box sx={{ mr: 1, mt: 1 }}>
         <WeekdaySelect
           name="roles"
           label="Roles"
@@ -84,7 +83,7 @@ const Filters = ({ data }: { data: filterType }) => {
           onFilterChange={handleFilterChange}
         />
       </Box>
-      <Box>
+      <Box sx={{ mt: 1 }}>
         <WeekdaySelect
           name="minBasePay"
           label="Min base pay"
