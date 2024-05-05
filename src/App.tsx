@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import { WeekdayTabs } from "./components/WeekdayTabs";
 import Filters from "./components/Filters";
 import Jobs from "./components/Jobs";
-import { jobInterface } from "./shared/jobType";
+import { jobInterface } from "./utils/jobType";
 
 function App() {
   const [tabSelected, setTabSelected] = useState<string>("search");

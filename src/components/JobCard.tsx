@@ -1,7 +1,7 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { useState } from "react";
-import { jobInterface } from "../shared/jobType";
-import { findSalary } from "../shared/findSalary";
+import { jobInterface } from "../utils/jobType";
+import { findSalary } from "../utils/findSalary";
 export const JobCard = ({ job }: { job: jobInterface }) => {
   const [expand, setExpand] = useState<boolean>(false);
 

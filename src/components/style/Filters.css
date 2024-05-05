@@ -3,5 +3,14 @@
   margin-top: 20px;
   width: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding: 0 20px 20px;
+}
+
+.filters-container p {
+  font-size: 13px;
+  margin: 6px 0;
+  font-weight: 500;
 }
