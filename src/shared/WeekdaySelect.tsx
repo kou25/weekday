@@ -1,14 +1,23 @@
-import { FormControl, IconButton, InputAdornment, Select } from "@mui/material";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  MenuItem,
+  Select
+} from "@mui/material";
 import { IoIosClose } from "react-icons/io";
+import { drowdownInterface } from "../utils/staticOptions";
 
 const WeekdaySelect = ({
   label,
   minWidth,
-  placeholder
+  placeholder,
+  options
 }: {
   label: string;
   minWidth: number;
   placeholder: string;
+  options: drowdownInterface[];
 }) => {
   return (
     <>
@@ -42,7 +51,18 @@ const WeekdaySelect = ({
               </IconButton>
             </InputAdornment>
           }
-        ></Select>
+          MenuProps={{ sx: { height: "300px" } }}
+        >
+          {options.map((option) => (
+            <MenuItem
+              key={option.id}
+              value={option.value}
+              sx={{ fontSize: "12px" }}
+            >
+              {option.value}
+            </MenuItem>
+          ))}
+        </Select>
       </FormControl>
     </>
   );
