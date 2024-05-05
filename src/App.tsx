@@ -7,7 +7,8 @@ import Jobs from "./components/Jobs";
 import { jobInterface } from "./shared/jobType";
 
 function App() {
-  const [tabSelected, setTabSelected] = useState("search");
+  const [tabSelected, setTabSelected] = useState<string>("search");
+  const [count, setCount] = useState<number>(0);
   const [jobs, setJobs] = useState<jobInterface[]>([]);
   useEffect(() => {
     const fetchJobs = async () => {
@@ -35,6 +36,7 @@ function App() {
         }
         const data = await response.json();
         setJobs(data.jdList);
+        setCount(data.totalCount);
       } catch (error) {
         console.error(error);
       }
@@ -50,6 +52,7 @@ function App() {
         <WeekdayTabs
           selected={tabSelected}
           onChange={(value: string) => setTabSelected(value)}
+          count={count}
         />
         <Filters />
         <Jobs data={jobs} />
