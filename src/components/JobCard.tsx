@@ -34,16 +34,14 @@ export const JobCard = ({ job }: { job: jobInterface }) => {
           Job description:
         </Typography>
       </Box>
-      <Box mb={2}>
-        {expand
-          ? job.jobDetailsFromCompany
-          : job.jobDetailsFromCompany.slice(0, 600) + "... "}
-        {job.jobDetailsFromCompany.length > 600 && (
-          <small id="expand" onClick={toggleExpand}>
-            {expand ? "Hide" : "Show more"}
-          </small>
-        )}
+      <Box mb={2} className={`desc-card ${expand ? "expanded " : ""}`}>
+        {job.jobDetailsFromCompany}
       </Box>
+      {job.jobDetailsFromCompany.length > 600 && (
+        <div id="expand" onClick={toggleExpand}>
+          <small>{expand ? "Hide" : "Show more"}</small>
+        </div>
+      )}
       <div className="info-container">
         <h3>Minimum Experience</h3>
         <p>{job.minExp ?? 0} years</p>

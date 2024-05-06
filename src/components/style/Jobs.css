@@ -79,4 +79,23 @@ p {
 #expand {
   cursor: pointer;
   color: #3522e2;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  position: relative;
+  top: -20px;
+}
+
+.desc-card {
+  height: 250px;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    rgb(255, 255, 255),
+    rgb(255, 255, 255),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.desc-card.expanded {
+  height: auto;
+  mask-image: none;
 }
